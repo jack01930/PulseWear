@@ -440,7 +440,7 @@ class MainActivity : Activity() {
 
     private fun timeOf(instant: Instant): String = CLOCK.format(instant.atZone(ZoneId.systemDefault()))
 
-    private fun formatSteps(steps: Int): String = String.format(Locale.ROOT, "%,d", steps)
+    private fun formatSteps(steps: Int): String = String.format(Locale.US, "%,d", steps)
 
     private companion object {
         val CLOCK: DateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm", Locale.ROOT)
