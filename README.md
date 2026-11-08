@@ -2,6 +2,14 @@
 
 Pulse Wear 是一个 Kotlin Android 应用，用模拟穿戴设备演示扫描、连接、查看设备信息、同步心率与步数以及本地历史。界面沿用 Restore 的浅灰背景、圆角设备卡、大数字读数、趋势曲线和底部导航。
 
+## 网页演示
+
+**[在线体验 Pulse Wear · 手机视图](https://jack01930.github.io/PulseWear/?view=app)**
+
+电脑浏览器会以手机竖屏比例显示演示。可以扫描并连接模拟手环、同步心率与步数、重试同步超时，并查看保存在当前浏览器的历史。
+
+网页源码在 `docs/`。本地预览可在项目根目录运行 `python -m http.server 8080 --directory docs`，再打开 `http://localhost:8080/?view=app`。
+
 ## 运行
 
 - 用 Android Studio 打开项目根目录，使用 IDE 自带 JDK 或 JDK 17 及以上，安装 Android SDK 35。[AGP 8.11 工具链要求](https://developer.android.com/build/releases/agp-8-11-0-release-notes)

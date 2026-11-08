@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f1f6fc">
+  <meta name="description" content="在浏览器中体验 Pulse Wear 的模拟手环连接、健康同步和本地历史。">
+  <title>Pulse Wear · 网页演示</title>
+  <link rel="icon" type="image/svg+xml" href="./pulse.svg">
+  <link rel="stylesheet" href="./demo.css">
+  <script defer src="./demo.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="./"><img src="./pulse.svg" alt="" width="34" height="34"> Pulse Wear</a>
+    <a class="source" href="https://github.com/jack01930/PulseWear">GitHub 源码 <span aria-hidden="true">↗</span></a>
+  </header>
+
+  <main class="stage">
+    <section class="intro" aria-labelledby="headline">
+      <p class="eyebrow"><span></span> 开源穿戴设备演示</p>
+      <h1 id="headline">连接手环<br>查看健康数据</h1>
+      <p class="lead">在浏览器中体验 Pulse Wear。连接模拟手环、同步心率和步数，再查看保存到本机的记录。</p>
+      <ol class="guide">
+        <li><span>01</span><div><strong>发现并连接</strong><p>扫描附近设备，选择 Pulse Band S1。</p></div></li>
+        <li><span>02</span><div><strong>同步并查看</strong><p>查看心率趋势、今日步数和历史记录。</p></div></li>
+        <li><span>03</span><div><strong>试一次超时重试</strong><p>在设备页开启模拟超时，再发起同步。</p></div></li>
+      </ol>
+      <a class="launch" href="./?view=app">打开手机视图 <span aria-hidden="true">↗</span></a>
+      <p class="local-note">全程使用示例数据。历史保存在此浏览器。</p>
+    </section>
+
+    <section class="app" aria-label="Pulse Wear 交互演示">
+      <div class="phone-top" aria-hidden="true"><span></span></div>
+      <div class="app-bar">
+        <div class="brand"><img src="./pulse.svg" alt="" width="28" height="28"> Pulse Wear</div>
+        <span class="chip">MOCK 演示</span>
+      </div>
+      <div id="panel" class="panel"></div>
+      <noscript><p class="note">启用 JavaScript 后即可使用网页演示。</p></noscript>
+      <nav class="tabs" aria-label="演示页面">
+        <button type="button" data-tab="health"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 8.7c0 4.3-8.8 9.8-8.8 9.8S3.2 13 3.2 8.7a4.6 4.6 0 0 1 8.8-1.8 4.6 4.6 0 0 1 8.8 1.8Z"/></svg>健康</button>
+        <button type="button" data-tab="device" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="4"/><path d="m9 6 1-4h4l1 4m-6 12 1 4h4l1-4m-3-9v3l2 1"/></svg>设备</button>
+        <button type="button" data-tab="history"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5v4.8l3.5 2"/></svg>历史</button>
+      </nav>
+      <p id="announcement" class="sr-only" role="status" aria-live="polite"></p>
+    </section>
+  </main>
+  <footer class="site-footer"><span>Pulse Wear</span><a href="https://github.com/jack01930/PulseWear/blob/main/LICENSE">MIT License</a></footer>
+</body>
+</html>
