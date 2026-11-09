@@ -1,34 +1,70 @@
-# Pulse Wear
+<div align="center">
+  <img src="docs/pulse.svg" width="64" height="64" alt="Pulse Wear 图标">
+  <h1>Pulse Wear</h1>
+  <p>一款开源的穿戴设备模拟应用，提供原生 Android 版和可交互的网页手机视图。</p>
+  <p>
+    <a href="https://jack01930.github.io/PulseWear/?view=app"><img alt="打开在线演示" src="https://img.shields.io/badge/Live_Demo-Pulse_Wear-086bd6?style=flat-square"></a>
+    <a href="#运行-android-版"><img alt="Android API 27+" src="https://img.shields.io/badge/Android-API_27%2B-278348?style=flat-square"></a>
+    <a href="app/build.gradle.kts"><img alt="Kotlin 2.2.20" src="https://img.shields.io/badge/Kotlin-2.2.20-6352cc?style=flat-square"></a>
+    <a href="LICENSE"><img alt="MIT 许可证" src="https://img.shields.io/badge/License-MIT-57657b?style=flat-square"></a>
+  </p>
+  <a href="https://jack01930.github.io/PulseWear/?view=app">
+    <img src="docs/pulse-wear-preview.png" width="330" alt="Pulse Wear 手机视图，展示心率趋势、今日步数和同步状态">
+  </a>
+  <p><strong><a href="https://jack01930.github.io/PulseWear/?view=app">点击截图，直接体验 App ↗</a></strong></p>
+  <p><a href="#功能">功能</a> · <a href="#快速开始">快速开始</a> · <a href="#项目结构">项目结构</a></p>
+</div>
 
-Pulse Wear 是一个 Kotlin Android 应用，用模拟穿戴设备演示扫描、连接、查看设备信息、同步心率与步数以及本地历史。界面沿用 Restore 的浅灰背景、圆角设备卡、大数字读数、趋势曲线和底部导航。
+## 功能
 
-## 网页演示
+| 功能 | 可以体验的操作 |
+| --- | --- |
+| 发现与连接 | 扫描并连接模拟手环 Pulse Band S1，查看型号、固件、电量和信号 |
+| 健康同步 | 同步心率和步数，在健康页查看心率趋势 |
+| 本地历史 | 按设备和日期查看快照，重复同步更新当日记录 |
+| 超时恢复 | 在设备页开启「模拟下次同步超时」，发起同步，再点击「重试同步」 |
 
-**[在线体验 Pulse Wear · 手机视图](https://jack01930.github.io/PulseWear/?view=app)**
+两种版本均使用示例设备和健康数据。网页版把历史保存在当前浏览器，Android 版保存到应用私有存储。
 
-电脑浏览器会以手机竖屏比例显示演示。可以扫描并连接模拟手环、同步心率与步数、重试同步超时，并查看保存在当前浏览器的历史。
+## 快速开始
 
-网页源码在 `docs/`。本地预览可在项目根目录运行 `python -m http.server 8080 --directory docs`，再打开 `http://localhost:8080/?view=app`。
+### 在线体验
 
-## 运行
+打开[手机视图](https://jack01930.github.io/PulseWear/?view=app)，在「设备」页扫描并连接手环，进入「健康」页同步数据，再到「历史」查看记录。
 
-- 用 Android Studio 打开项目根目录，使用 IDE 自带 JDK 或 JDK 17 及以上，安装 Android SDK 35。[AGP 8.11 工具链要求](https://developer.android.com/build/releases/agp-8-11-0-release-notes)
-- 在 Device Manager 选用 Pixel 4。Android 10（API 29）x86_64 镜像可运行此项目。设备内存可设为 1536 MB，并关闭两路虚拟摄像头。
-- 运行 `app`。也可在已配置 `JAVA_HOME` 和 `ANDROID_HOME` 的 PowerShell 中运行 `.\gradlew.bat :app:assembleDebug`，APK 输出到 `app/build/outputs/apk/debug/app-debug.apk`。
+### 本地运行网页版
 
-## 演示路径
+在项目根目录启动静态文件服务。
 
-1. 在「设备」点击「扫描设备」，找到 Pulse Band S1 后点击「连接手环」。连接后可查看型号、固件、电量、信号和最近同步时间。
-2. 点击「查看健康概览」，再点击「同步健康数据」。同步成功后可查看心率、心率趋势和步数。
-3. 在「历史」查看本地记录及详情。重启 App 后仍可查看已保存记录。
-4. 回到「设备」，开启「模拟下次同步超时」。在「健康」发起同步，等到超时提示，再点击「重试同步」。重试成功后，历史中仍只有同一设备当日的一条记录。
+```sh
+python -m http.server 8080 --directory docs
+```
 
-## 实现
+浏览器打开 `http://localhost:8080/?view=app` 即可操作。
 
-- `WearableClient` 定义扫描、连接、通道准备和健康数据请求。`MockWearableClient` 在本地模拟发现设备、服务准备和订阅回包，超时演示会丢弃一次模拟回包。
-- `HealthHistory` 用 Android 私有 SharedPreferences 保存每日快照，以设备 ID 和日期为键。同日成功同步会更新该记录，超时保留既有记录。
-- 所有设备、信号和健康读数均为演示数据，运行无需蓝牙、网络权限或账号。
+### 运行 Android 版
 
-## 交付打包
+用 Android Studio 打开项目根目录，使用 IDE 自带 JDK 或 JDK 17 及以上，安装 Android SDK 35，选择 Android 8.1（API 27）及以上的设备或模拟器运行 `app`。[Android Gradle Plugin 8.11 工具链要求](https://developer.android.com/build/releases/agp-8-11-0-release-notes)
 
-先在项目根目录完成真实 Git 提交，然后在 PowerShell 运行 `powershell -NoProfile -ExecutionPolicy Bypass -File .\package-submission.ps1`。输出 `delivery/PulseWear-source.zip`，包含 `.git`、源码、Gradle Wrapper、README 和 AI 使用说明。另行提交演示录屏及 AI 对话记录。
+在已配置 `JAVA_HOME` 和 `ANDROID_HOME` 的 PowerShell 中，也可构建调试 APK。
+
+```powershell
+.\gradlew.bat :app:assembleDebug
+```
+
+构建产物在 `app/build/outputs/apk/debug/app-debug.apk`。
+
+## 项目结构
+
+| 位置 | 职责 |
+| --- | --- |
+| [`app/`](app/) | Kotlin 与原生 Android View 界面 |
+| [`WearableClient.kt`](app/src/main/java/app/pulse/wear/WearableClient.kt) | 设备访问接口和 Mock 客户端，模拟发现、连接准备、回包与超时 |
+| [`HealthHistory.kt`](app/src/main/java/app/pulse/wear/HealthHistory.kt) | 通过 SharedPreferences 持久化每日快照 |
+| [`docs/`](docs/) | 无构建步骤的静态网页，由 GitHub Pages 从 `main` 分支发布 |
+
+Android 版参考 Restore 的设备卡片、底部导航、大数字读数和趋势图。[AI 使用说明](AI-USAGE.md)
+
+## 许可证
+
+本项目采用 [MIT 许可证](LICENSE)。
